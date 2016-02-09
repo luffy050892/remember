@@ -12,18 +12,16 @@ class Auth extends CI_Controller {
 	public function index() {
 
 		if($this->session->userdata('username')) {
-			echo "currently logged in";
-			exit;
+			redirect('pass', 'refresh');
 		}
 
-		$this->load->view('auth/login');
+		redirect('auth/login', 'refresh');
 	}
 
 	public function login() {
 		if(!empty($this->input->post('identity')) && !empty($this->input->post('password'))) {
 			if($this->auth_model->login($this->input->post('identity'), $this->input->post('password'))) {
-				echo "success";
-				exit;
+				redirect('pass', 'refresh');
 			} else {
 				$this->session->set_flashdata('message.content', 'Login failed. Check username and password');
 				$this->session->set_flashdata('message.label', 'label-warning');
@@ -40,10 +38,10 @@ class Auth extends CI_Controller {
 		$this->load->view('auth/login');
 	}
 
-	public function create() {
+	/*public function create() {
 		//if($this->input->post('identity')) {
 			$this->auth_model->create('restie', 'restie');
 		//}
 		$this->load->view('auth/login');
-	}
+	}*/
 }

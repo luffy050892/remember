@@ -57,6 +57,7 @@
                                             'placeholder' => 'Username',
                                             'class' => 'form-control',
                                             'autofocus' => 'autofocus',
+                                            'required' => 'required',
                                         );
                                     ?>
                                     <?php echo form_input($identity);?>
@@ -69,6 +70,7 @@
                                             'type' => 'password',
                                             'placeholder' => 'Password',
                                             'class' => 'form-control',
+                                            'required' => 'required',
                                         );
                                     ?>
                                     <?php echo form_input($password);?>
@@ -76,7 +78,7 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <?php echo form_submit('submit', 'Login', array('class' => 'btn btn-lg btn-success btn-block'));?>
                             </fieldset>
-                        </form>
+                        <?php echo form_close();?>
                     </div>
                 </div>
             </div>

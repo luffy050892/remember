@@ -89,7 +89,7 @@ class Auth_model extends CI_Model {
 		
 		return false;
 	}
-
+	/*
 	public function create($identity, $password) {
         $data = array(
             'username' => $identity,
@@ -98,5 +98,5 @@ class Auth_model extends CI_Model {
 
        // $this->db->insert('users', $data);
         exit;
-	}
+	}*/
 }

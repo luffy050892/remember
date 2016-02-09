@@ -12,4 +12,13 @@ class Pass extends CI_Controller {
 	public function index() {
 		$this->load->view('pass/index');
 	}
+
+	public function add() {
+
+		if($this->input->post('username')) {
+			
+		}
+		
+		$this->load->view('pass/save_pass');
+	}
 }
