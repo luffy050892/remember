@@ -16,9 +16,20 @@ class Pass extends CI_Controller {
 	public function add() {
 
 		if($this->input->post('username')) {
+			$data = array(
+					'account' => $this->input->post('account'),
+					'username' => $this->input->post('username'),
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password'),
+				);
 			
+			if($this->pass_model->saveAccount($data)) {
+
+			} else {
+
+			}
 		}
-		
+
 		$this->load->view('pass/save_pass');
 	}
 }
