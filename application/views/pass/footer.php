@@ -10,7 +10,7 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo base_url(); ?>assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->copiedSuccess
+    <!-- Morris Charts JavaScript -->
     <script src="<?php echo base_url(); ?>assets/bower_components/raphael/raphael-min.js"></script>
     <script src="<?php echo base_url(); ?>assets/bower_components/morrisjs/morris.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/morris-data.js"></script>
@@ -20,6 +20,7 @@
 
     <script>
 
+            alert("yes");
         $(".showPass").click(function () {
             var restie = $(this);
             $.post( 
@@ -90,6 +91,8 @@
             }
             return succeed;
         }
+
+            $("#editModal").modal('show');
     </script>
 
 </body>
