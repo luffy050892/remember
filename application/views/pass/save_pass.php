@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Forms</h1>
+                <h1 class="page-header">Add Account</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -13,10 +13,12 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Generate your own password
-                    </div><div class="panel-body">
-                	<?php echo form_open("pass/add"); ?>
+                    </div>
+                    <div class="panel-body">
+                	
 	                    <div class="row">
 	                        <div class="col-lg-6">
+                                <?php echo form_open("pass/add"); ?>
 	                            <div class="form-group">
 	                                <label>Account</label>
 	                                <?php 
@@ -32,14 +34,10 @@
                                     <?php echo form_input($account);?>
 	                                <p class="help-block">Example: FB, Instagram, Twitter</p>
 	                            </div>
-	                        </div>
-	                    </div>
 
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                            <div class="form-group">
-	                                <label>Username</label>
-	                                <?php 
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <?php 
                                         $username = array(
                                             'name' => 'username',
                                             'id' => 'username',
@@ -49,15 +47,11 @@
                                         );
                                     ?>
                                     <?php echo form_input($username);?>
-	                            </div>
-	                        </div>
-	                    </div>
+                                </div>
 
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                            <div class="form-group">
-	                                <label>Email</label>
-	                                <?php 
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <?php 
                                         $email = array(
                                             'name' => 'email',
                                             'id' => 'email',
@@ -66,15 +60,11 @@
                                         );
                                     ?>
                                     <?php echo form_input($email);?>
-	                            </div>
-	                        </div>
-	                    </div>
+                                </div>
 
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                            <div class="form-group">
-	                                <label>Password</label>
-	                                <?php 
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <?php 
                                         $password = array(
                                             'name' => 'password',
                                             'id' => 'password',
@@ -84,15 +74,11 @@
                                         );
                                     ?>
                                     <?php echo form_input($password);?>
-	                            </div>
-	                        </div>
-	                    </div>
+                                </div>
 
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                            <div class="form-group">
-	                                <label>Description</label>
-	                                <?php 
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <?php 
                                         $password = array(
                                             'name' => 'description',
                                             'id' => 'description',
@@ -101,26 +87,41 @@
                                         );
                                     ?>
                                     <?php echo form_textarea($password);?>
-	                            </div>
-	                        </div>
-	                    </div>
+                                </div>
 
-	                    <div class="row">
-	                        <div class="col-lg-6">
-	                       	 	<?php echo form_submit('submit', 'Save', array('class' => 'btn btn-lg btn-success btn-block'));?>
+                                <div class="form-group">
+                                    <?php echo form_submit('submit', 'Save', array('class' => 'btn btn-lg btn-success btn-block'));?>
+                                </div>
+                                <?php echo form_close();?>
 	                        </div>
+
+                            <div class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <button id="generatePass" type="button" class="btn btn-outline btn-success btn-lg btn-block">Generate Password</button>
+                                    </div>
+                                    <div class="panel-body" style="height:100px; text-align:center">
+                                        <h3 id="generatedPass"></h3>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <button id="copyButton" type="button" class="btn btn-outline btn-info btn-lg btn-block">Copy Password</button>
+                                    </div>
+                                </div>
+
+                                <div id="copiedSuccess" style="display:none">
+                                    
+                                </div>
+                            </div>
 	                    </div>
-                    <?php echo form_close();?>
-                   
+                    </div>
+
                 </div>
-
-            </div>
                     <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
+            <!-- /.panel -->
         </div>
-        <!-- /.row -->
+        <!-- /.col-lg-12 -->
     </div>
+    <!-- /.row -->
+</div>
 <?php $this->load->view('pass/footer');?>

@@ -6,11 +6,18 @@ class Pass extends CI_Controller {
 		parent::__construct();
         $this->load->helper('url');
         $this->load->library('form_validation');
-		$this->load->model('auth_model');
+		$this->load->model('pass_model');
+		$this->load->helper('string');
+
+		if(!$this->session->userdata('username')) {
+			redirect('auth/login', 'refresh');
+		}
+
 	}
 
 	public function index() {
-		$this->load->view('pass/index');
+		$this->data['accounts'] = $this->pass_model->getAccounts();
+		$this->load->view('pass/index', $this->data);
 	}
 
 	public function add() {
@@ -21,15 +28,23 @@ class Pass extends CI_Controller {
 					'username' => $this->input->post('username'),
 					'email' => $this->input->post('email'),
 					'password' => $this->input->post('password'),
+					'description' => $this->input->post('description'),
+					'user_id' => $this->session->userdata('user_id'),
 				);
 			
-			if($this->pass_model->saveAccount($data)) {
-
-			} else {
-
-			}
+			$this->pass_model->saveAccount($data);
 		}
 
 		$this->load->view('pass/save_pass');
+	}
+
+	function random_str($length = 8) {
+	    //echo $str;exit;
+		$lengthDeduct = ($length / 4);
+		$specials = substr(str_shuffle("[]{};:/?<>.&*()%^$#@"), 0, $lengthDeduct);
+		$length -= $lengthDeduct;
+		$randomStr = str_shuffle(random_string('alnum', $length).$specials); 
+		echo $randomStr; exit;
+	    return random_string('alnum', $length);
 	}
 }

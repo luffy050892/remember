@@ -30,36 +30,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td><button type="button" class="btn btn-primary btn-xs">Show Password</button></td>
-                                        <td><a href="#"><i class="fa fa-edit fa-fw"></i>Edit</a></td>
-                                        <td><a href="#"><i class="fa fa-times fa-fw"></i>Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>Mark</td>
-                                        <td><button type="button" class="btn btn-primary btn-xs">Show Password</button></td>
-                                        <td><a href="#"><i class="fa fa-edit fa-fw"></i>Edit</a></td>
-                                        <td><a href="#"><i class="fa fa-times fa-fw"></i>Delete</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>Mark</td>
-                                        <td><button type="button" class="btn btn-primary btn-xs">Show Password</button></td>
-                                        <td><a href="#"><i class="fa fa-edit fa-fw"></i>Edit</a></td>
-                                        <td><a href="#"><i class="fa fa-times fa-fw"></i>Delete</a></td>
-                                    </tr>
+                                    <?php if(!empty($accounts)) { ?>
+                                        <?php foreach($accounts as $account) { ?>
+                                        <tr>
+                                            <td><?php echo $account->account; ?></td>
+                                            <td><?php echo $account->username; ?></td>
+                                            <td><?php echo $account->email; ?></td>
+                                            <td><?php echo $account->date_added; ?></td>
+                                            <td><?php echo $account->last_modified; ?></td>
+                                            <td><button type="button" class="btn btn-primary btn-xs">Show Password</button></td>
+                                            <td><a href="#"><i class="fa fa-edit fa-fw"></i>Edit</a></td>
+                                            <td><a href="#"><i class="fa fa-times fa-fw"></i>Delete</a></td>
+                                        </tr>
+                                        <?php } ?>
+                                    <?php } ?>
+                                    
                                 </tbody>
                             </table>
                         </div>

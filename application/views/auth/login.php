@@ -40,7 +40,7 @@
                 <div class="login-panel panel panel-default">                    
 
                     <?php if($this->session->flashdata('message.content')) { 
-                        echo '<span class = "'.$this->session->flashdata('message.label').'">'.$this->session->flashdata('message.content').'</span>';}
+                        echo '<div class = "alert '.$this->session->flashdata('message.label').'">'.$this->session->flashdata('message.content').'</div>';}
                     ?>
                     <div class="panel-heading">
                         <h3 class="panel-title">Please Sign In</h3>
