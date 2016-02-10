@@ -18,7 +18,7 @@
                 	
 	                    <div class="row">
 	                        <div class="col-lg-6">
-                                <?php echo form_open("pass/add"); ?>
+                                <?php echo form_open("pass/add", array('autocomplete' => 'off')); ?>
 	                            <div class="form-group">
 	                                <label>Account</label>
 	                                <?php 
@@ -29,6 +29,7 @@
                                             'class' => 'form-control',
                                             'autofocus' => 'autofocus',
                                             'required' => 'required',
+                                            'value' => '',
                                         );
                                     ?>
                                     <?php echo form_input($account);?>
@@ -44,6 +45,7 @@
                                             'type' => 'text',
                                             'class' => 'form-control',
                                             'required' => 'required',
+                                            'value' => '',
                                         );
                                     ?>
                                     <?php echo form_input($username);?>
@@ -57,6 +59,7 @@
                                             'id' => 'email',
                                             'type' => 'email',
                                             'class' => 'form-control',
+                                            'value' => '@gmail.com',
                                         );
                                     ?>
                                     <?php echo form_input($email);?>
@@ -71,6 +74,7 @@
                                             'type' => 'password',
                                             'class' => 'form-control',
                                             'required' => 'required',
+                                            'value' => '',
                                         );
                                     ?>
                                     <?php echo form_input($password);?>
@@ -79,14 +83,15 @@
                                 <div class="form-group">
                                     <label>Description</label>
                                     <?php 
-                                        $password = array(
+                                        $description = array(
                                             'name' => 'description',
                                             'id' => 'description',
                                             'rows' => '3',
                                             'class' => 'form-control',
+                                            'value' => '',
                                         );
                                     ?>
-                                    <?php echo form_textarea($password);?>
+                                    <?php echo form_textarea($description);?>
                                 </div>
 
                                 <div class="form-group">
