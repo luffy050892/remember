@@ -47,4 +47,9 @@ class Pass extends CI_Controller {
 		echo $randomStr; exit;
 	    return random_string('alnum', $length);
 	}
+
+	function getPassword() {
+		//echo $this->input->post('id');
+		$this->pass_model->getPassword($this->input->post('id'));
+	}
 }

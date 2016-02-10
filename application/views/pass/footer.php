@@ -19,13 +19,25 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/sb-admin-2.js"></script>
 
     <script>
+
+        $(".showPass").click(function () {
+            var restie = $(this);
+            $.post( 
+                  "pass/getPassword",
+              { id: $(this).attr('restie') },
+              function(data) {
+                restie.parent().html(data);
+                //$('#stage').html(data);
+              }
+           );
+        });
+
         $("#generatePass").click(function () {
             $.post( 
                   "random_str",
               { name: "Zara" },
               function(data) {
                 $("#generatedPass").html(data);
-                //$('#stage').html(data);
               }
            );
         });

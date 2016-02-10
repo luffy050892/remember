@@ -38,9 +38,9 @@
                                             <td><?php echo $account->email; ?></td>
                                             <td><?php echo $account->date_added; ?></td>
                                             <td><?php echo $account->last_modified; ?></td>
-                                            <td><button type="button" class="btn btn-primary btn-xs">Show Password</button></td>
-                                            <td><a href="#"><i class="fa fa-edit fa-fw"></i>Edit</a></td>
-                                            <td><a href="#"><i class="fa fa-times fa-fw"></i>Delete</a></td>
+                                            <td class="ESf"><button type="button" class="btn btn-primary btn-xs showPass" restie= "<?php echo $account->id; ?>">Show Password</button></td>
+                                            <td><a href="#"><i class="fa fa-edit fa-fw"></i></a></td>
+                                            <td><a href="#"><i class="fa fa-times fa-fw"></i></a></td>
                                         </tr>
                                         <?php } ?>
                                     <?php } ?>
