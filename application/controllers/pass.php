@@ -38,6 +38,21 @@ class Pass extends CI_Controller {
 		$this->load->view('pass/save_pass');
 	}
 
+	public function edit() {
+		if($this->input->post('username')) {
+			$data = array(
+					'account' => $this->input->post('account_name'),
+					'username' => $this->input->post('username'),
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password'),
+					'description' => $this->input->post('description'),
+				);
+			
+			$this->pass_model->updateAccount($data, $this->input->post('id'));
+		}
+		//$this->load->view('pass');
+	}
+
 	function random_str($length = 8) {
 	    //echo $str;exit;
 		$lengthDeduct = ($length / 4);

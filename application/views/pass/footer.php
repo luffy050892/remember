@@ -20,7 +20,31 @@
 
     <script>
 
-            alert("yes");
+        $(".edit-modal").click(function() {
+            var account_id = $(this).attr('restie');
+            $("input[name=account_id]").val(account_id);
+            $("#edit_account").val($("#account"+account_id).html());
+            $("#edit_username").val($("#username"+account_id).html());
+            $("#edit_email").val($("#email"+account_id).html());
+            $("#edit_description").val($("#description"+account_id).html());
+            $("#myModal").modal({
+            });
+        }); 
+
+        $( "#editForm" ).submit(function( event ) {
+
+            var restie = $(this);
+            $.post( 
+                  "pass/edit",
+              { id: $("input[name=account_id]").val(), account_name : $("#edit_account").val(), username : $("#edit_username").val(), email : $("#edit_email").val(), description : $("#edit_description").val(), password : $("#edit_password").val() },
+              function(data) {
+                 $("#myModal").modal('hide');
+              }
+           );
+
+            event.preventDefault();
+        });
+
         $(".showPass").click(function () {
             var restie = $(this);
             $.post( 
@@ -91,8 +115,7 @@
             }
             return succeed;
         }
-
-            $("#editModal").modal('show');
+        
     </script>
 
 </body>

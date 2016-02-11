@@ -11,10 +11,17 @@ class Pass_model extends CI_Model {
 
 	public function saveAccount($data = null) {
         $data['password'] = $this->encrypt->encode($data['password']);
-        $this->db->insert('accounts',$data);
+        $this->db->insert('accounts', $data);
 
         return true;
 	}
+
+    public function updateAccount($data = null, $id = null) {
+        $data['password'] = $this->encrypt->encode($data['password']);
+        $this->db->where('id', $id);
+        $this->db->update('accounts', $data);
+        return true;
+    }
 
 	function getAccounts() {
         $this->db->where('user_id', $this->session->userdata('user_id'));

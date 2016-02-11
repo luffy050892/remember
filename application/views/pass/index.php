@@ -1,5 +1,4 @@
 <?php $this->load->view('pass/header');?>
-
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -33,15 +32,26 @@
                                     <?php if(!empty($accounts)) { ?>
                                         <?php foreach($accounts as $account) { ?>
                                         <tr>
-                                            <td><?php echo $account->account; ?></td>
-                                            <td><?php echo $account->username; ?></td>
-                                            <td><?php echo $account->email; ?></td>
+                                            <td id="account<?php echo $account->id; ?>"><?php echo $account->account; ?></td>
+                                            <td id="username<?php echo $account->id; ?>"><?php echo $account->username; ?></td>
+                                            <td id="email<?php echo $account->id; ?>"><?php echo $account->email; ?></td>
                                             <td><?php echo $account->date_added; ?></td>
-                                            <td><?php echo $account->last_modified; ?></td>
-                                            <td class="ESf"><button type="button" class="btn btn-primary btn-xs showPass" restie= "<?php echo $account->id; ?>">Show Password</button></td>
-                                            <td><a href="#"><i class="fa fa-edit fa-fw"></i></a></td>
+                                            <td id="modified<?php echo $account->id; ?>"><?php echo $account->last_modified; ?></td>
+                                            <td><button type="button" class="btn btn-primary btn-xs showPass" restie= "<?php echo $account->id; ?>">Show Password</button></td>
+                                            <td><a href="#" class="edit-modal" restie="<?php echo $account->id; ?>"><i class="fa fa-edit fa-fw"></i></a></td>
                                             <td><a href="#"><i class="fa fa-times fa-fw"></i></a></td>
                                         </tr>
+                                        <?php 
+                                            $description2 = array(
+                                                'name' => 'description',
+                                                'id' => 'description'.$account->id,
+                                                'rows' => '3',
+                                                'style' => 'display:none',
+                                                'class' => 'form-control',
+                                                'value' => $account->description,
+                                            );
+                                        ?>
+                                        <?php echo form_textarea($description2);?>
                                         <?php } ?>
                                     <?php } ?>
                                     
@@ -57,42 +67,29 @@
             <!-- /.col-lg-6 -->
         </div>
     </div>
-        <!-- /#page-wrapper -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
-    <div id="" class="modal fade">
+    
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Update Account</h4>
                 </div>
                 <div class="modal-body">
-                    <?php echo form_open("pass/update", array('autocomplete' => 'off')); ?>
+                    <?php echo form_open("pass/edit", array('autocomplete' => 'off', 'id' => 'editForm')); ?>
+                    <?php 
+                    $account_id = array(
+                              'account_id'  => '',
+                            );
+                    echo form_hidden($account_id);
+                    ?>
                     <div class="form-group">
                         <label>Account</label>
                         <?php 
                             $account = array(
                                 'name' => 'account',
-                                'id' => 'account',
+                                'id' => 'edit_account',
                                 'type' => 'text',
                                 'class' => 'form-control',
                                 'autofocus' => 'autofocus',
@@ -109,7 +106,7 @@
                         <?php 
                             $username = array(
                                 'name' => 'username',
-                                'id' => 'username',
+                                'id' => 'edit_username',
                                 'type' => 'text',
                                 'class' => 'form-control',
                                 'required' => 'required',
@@ -124,7 +121,7 @@
                         <?php 
                             $email = array(
                                 'name' => 'email',
-                                'id' => 'email',
+                                'id' => 'edit_email',
                                 'type' => 'email',
                                 'class' => 'form-control',
                                 'value' => '@gmail.com',
@@ -138,7 +135,7 @@
                         <?php 
                             $password = array(
                                 'name' => 'password',
-                                'id' => 'password',
+                                'id' => 'edit_password',
                                 'type' => 'password',
                                 'class' => 'form-control',
                                 'required' => 'required',
@@ -153,7 +150,7 @@
                         <?php 
                             $description = array(
                                 'name' => 'description',
-                                'id' => 'description',
+                                'id' => 'edit_description',
                                 'rows' => '3',
                                 'class' => 'form-control',
                                 'value' => '',
@@ -161,19 +158,15 @@
                         ?>
                         <?php echo form_textarea($description);?>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <?php echo form_submit('submit', 'Save', array('class' => 'btn btn-lg btn-success btn-block'));?>
-                    </div>
-                    <?php echo form_close();?>
-                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <?php echo form_submit('submit', 'Save', array('class' => 'btn btn-primary'));?>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
+                <?php echo form_close();?>
             </div>
         </div>
     </div>
-<?php $this->load->view('pass/footer');?>
-   
 
+<?php $this->load->view('pass/footer');?>
