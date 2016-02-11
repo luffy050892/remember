@@ -10,6 +10,10 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo base_url(); ?>assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+     <!-- DataTables JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
     <!-- Morris Charts JavaScript -->
     <script src="<?php echo base_url(); ?>assets/bower_components/raphael/raphael-min.js"></script>
     <script src="<?php echo base_url(); ?>assets/bower_components/morrisjs/morris.min.js"></script>
@@ -19,7 +23,10 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/sb-admin-2.js"></script>
 
     <script>
-
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+        
         $(".edit-modal").click(function() {
             var account_id = $(this).attr('restie');
             $("input[name=account_id]").val(account_id);
@@ -34,11 +41,15 @@
         $( "#editForm" ).submit(function( event ) {
 
             var restie = $(this);
+            var account_id = $("input[name=account_id]").val();
             $.post( 
-                  "pass/edit",
+                "pass/edit",
               { id: $("input[name=account_id]").val(), account_name : $("#edit_account").val(), username : $("#edit_username").val(), email : $("#edit_email").val(), description : $("#edit_description").val(), password : $("#edit_password").val() },
               function(data) {
-                 $("#myModal").modal('hide');
+                $("#account"+account_id).html($("#edit_account").val());
+                $("#username"+account_id).html($("#edit_username").val());
+                $("#email"+account_id).html($("#edit_email").val());
+                $("#myModal").modal('hide');
               }
            );
 
@@ -59,7 +70,7 @@
 
         $("#generatePass").click(function () {
             $.post( 
-                  "random_str",
+                  "pass/random_str",
               { name: "Zara" },
               function(data) {
                 $("#generatedPass").html(data);

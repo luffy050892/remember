@@ -20,6 +20,12 @@
     <!-- Timeline CSS -->
     <link href="<?php echo base_url(); ?>assets/dist/css/timeline.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+    <link href="<?php echo base_url(); ?>assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="<?php echo base_url(); ?>assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -78,7 +84,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?php echo base_url(); ?>pass"><i class="fa fa-table fa-fw"></i> Dashboard</a>
+                            <a href="<?php echo base_url(); ?>pass"><i class="fa fa-table fa-fw"></i> Accounts</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>pass/add"><i class="fa fa-pencil fa-fw"></i> Add Account</a>
