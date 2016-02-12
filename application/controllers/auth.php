@@ -20,11 +20,23 @@ class Auth extends CI_Controller {
 
 	public function login() {
 		if(!empty($this->input->post('identity')) && !empty($this->input->post('password'))) {
-			if($this->auth_model->login($this->input->post('identity'), $this->input->post('password'))) {
-				redirect('pass', 'refresh');
+
+			if($this->session->userdata('log_attemp') > 2) {
+				$this->session->set_flashdata('message.content', 'Login attemps exceeded (3 times). Please try again after a few minutes');
+				$this->session->set_flashdata('message.label', 'label-danger');
 			} else {
-				$this->session->set_flashdata('message.content', 'Login failed. Check username and password');
-				$this->session->set_flashdata('message.label', 'label-warning');
+				if($this->auth_model->login($this->input->post('identity'), $this->input->post('password'))) {
+					redirect('pass', 'refresh');
+				} else {
+					if(!empty($this->session->userdata('log_attemp'))) {
+						$this->session->set_userdata('log_attemp', 1 + $this->session->userdata('log_attemp'));
+					} else {
+						$this->session->set_userdata('log_attemp', 1);
+					}
+
+					$this->session->set_flashdata('message.content', 'Login failed. Check username and password');
+					$this->session->set_flashdata('message.label', 'label-warning');
+				}
 			}
 		}
 
