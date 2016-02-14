@@ -1,4 +1,4 @@
-<div id="myModal" class="modal fade">
+<div id="editModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,7 +44,7 @@
                                     'value' => '',
                                 );
                             ?>
-                            <?php echo form_input($username);?>
+                            <?php echo form_input($username); ?>
                         </div>
 
                         <div class="form-group">
@@ -60,7 +60,17 @@
                             ?>
                             <?php echo form_input($email);?>
                         </div>
+                        <?php 
+                        $data = array(
+                            'name'        => 'newsletter',
+                            'id'          => 'newsletter',
+                            'value'       => 'accept',
+                            'checked'     => TRUE,
+                            'style'       => 'margin:10px',
+                            );
 
+                        echo form_checkbox($data);
+                        ?>
                         <div class="form-group">
                             <label>Password</label>
                             <?php 

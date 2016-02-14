@@ -15,7 +15,23 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button id="add-modal" class="btn btn-primary btn-sm"><i class="fa fa-pencil fa-fw"></i> Add Account</button>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="btn btn-primary btn-xs" id = "showDates">Toggle Dates</button>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Account</th>
@@ -31,7 +47,7 @@
                                 <tbody>
                                     <?php if(!empty($accounts)) { ?>
                                         <?php foreach($accounts as $account) { ?>
-                                        <tr class="odd gradeX">
+                                        <tr class="odd gradeX" id="form_<?php echo $account->id; ?>">
                                             <td id="account<?php echo $account->id; ?>"><?php echo $account->account; ?></td>
                                             <td id="username<?php echo $account->id; ?>"><?php echo $account->username; ?></td>
                                             <td id="email<?php echo $account->id; ?>"><?php echo $account->email; ?></td>
@@ -39,7 +55,7 @@
                                             <td id="modified<?php echo $account->id; ?>"><?php echo $account->last_modified; ?></td>
                                             <td><button type="button" class="btn btn-primary btn-xs showPass" restie= "<?php echo $account->id; ?>">Show Password</button></td>
                                             <td><a href="#" class="edit-modal" restie="<?php echo $account->id; ?>"><i class="fa fa-edit fa-fw"></i></a></td>
-                                            <td><a href="#"><i class="fa fa-times fa-fw"></i></a></td>
+                                            <td><a href="#" class="delete-modal" restie="<?php echo $account->id; ?>"><i class="fa fa-times fa-fw"></i></a></td>
                                         </tr>
                                         <?php 
                                             $description2 = array(
@@ -69,6 +85,8 @@
     </div>
     
     <!-- Modal HTML -->
+    <?php $this->load->view('pass/add_modal');?>
     <?php $this->load->view('pass/edit_modal');?>
+    <?php $this->load->view('pass/delete_modal');?>
 
 <?php $this->load->view('pass/footer');?>

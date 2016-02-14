@@ -23,8 +23,38 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/sb-admin-2.js"></script>
 
     <script>
-        $('#dataTables-example').DataTable({
-                responsive: true
+        var table = $('#dataTables-example').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    {
+                        "targets": [ 3 ],
+                        "visible": false,
+                    },
+                    {
+                        "targets": [ 4 ],
+                        "visible": false
+                    }
+                ]
+        });
+
+        $('#showDates').on( 'click', function (e) {
+            e.preventDefault();
+     
+            // Get the column API object
+            var column = table.column(3);
+     
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+
+            var column = table.column(4);
+     
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+        });
+
+        $("#add-modal").click(function() {
+            $("#addModal").modal({
+            });
         });
         
         $(".edit-modal").click(function() {
@@ -34,24 +64,49 @@
             $("#edit_username").val($("#username"+account_id).html());
             $("#edit_email").val($("#email"+account_id).html());
             $("#edit_description").val($("#description"+account_id).html());
-            $("#myModal").modal({
+            $("#editModal").modal({
             });
         }); 
+        
+        $(".delete-modal").click(function() {
+            var account_id = $(this).attr('restie');
+            $("input[name=delete_id]").val(account_id);
+            $("#deleteModal").modal({
+            });
+        });
+
+        $("#deleteThis").click(function() {
+            var restie = $(this);
+            var account_id = $("input[name=delete_id]").val();
+
+            $.post(
+                  "pass/delete",
+              { id: $("input[name=delete_id]").val() },
+              function(data) {
+                    $("#form_"+account_id).remove();
+                    $("#deleteModal").modal('hide');
+              }
+            );
+
+            event.preventDefault();
+        });
 
         $( "#editForm" ).submit(function( event ) {
 
             var restie = $(this);
             var account_id = $("input[name=account_id]").val();
-            $.post( 
-                "pass/edit",
-              { id: $("input[name=account_id]").val(), account_name : $("#edit_account").val(), username : $("#edit_username").val(), email : $("#edit_email").val(), description : $("#edit_description").val(), password : $("#edit_password").val() },
-              function(data) {
-                $("#account"+account_id).html($("#edit_account").val());
-                $("#username"+account_id).html($("#edit_username").val());
-                $("#email"+account_id).html($("#edit_email").val());
-                $("#myModal").modal('hide');
-              }
-           );
+
+            $.ajax({
+                type : 'POST',
+                url : 'pass/edit',
+                data : $(this).serialize(),
+                success:function(data) {
+                    $("#account"+account_id).html($("#edit_account").val());
+                    $("#username"+account_id).html($("#edit_username").val());
+                    $("#email"+account_id).html($("#edit_email").val());
+                    $("#editModal").modal('hide');
+                }
+            });
 
             event.preventDefault();
         });

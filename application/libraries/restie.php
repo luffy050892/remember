@@ -2,8 +2,10 @@
 
 class Restie {
 
+	protected $ci;
+
 	public function __construct() {
-		$this->ci->load->library('email');
+		$this->ci =& get_instance();
 	}
 
 	public function send_mail($data = null) {
@@ -19,15 +21,15 @@ class Restie {
 			    'charset'   => 'iso-8859-1'
 			);
 		 
-			$this->load->library('email', $config);
-			$this->email->set_newline("\r\n");
+			$this->ci->load->library('email', $config);
+			$this->ci->email->set_newline("\r\n");
 				
-			$this->email->from($data['from'], $data['from_name']);
-			$this->email->to($data['to']);
-			$this->email->subject($data['subject']);
-			$this->email->message($data['message']);
-			$this->email->send();
+			$this->ci->email->from('prometheuswebsite@gmail.com', 'Prometheus Admin');
+			$this->ci->email->to($data['to']);
+			$this->ci->email->subject($data['subject']);
+			$this->ci->email->message($data['message']."\n - Prometheus Website");
+			//$this->ci->email->send();
 		}
-		//$this->email->print_debugger();
+		//$this->ci->email->print_debugger();
 	}
 }

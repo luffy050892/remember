@@ -23,6 +23,12 @@ class Pass_model extends CI_Model {
         return true;
     }
 
+    public function deleteAccount($id = null) {
+        $this->db->where('id', $id);
+        //$this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->delete('accounts');
+    }
+
 	function getAccounts() {
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $query = $this->db->get('accounts');
